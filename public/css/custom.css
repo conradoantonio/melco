@@ -1,0 +1,115 @@
+.back-img {
+    background: url('../img/bg-btn.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.dashboard-icon {
+	max-width: 45px!important;
+	max-height: 45px!important;
+}
+
+.select-error {
+    border-width: 1px!important;
+    border-style: solid!important;
+    border-color: #f2545b!important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    border-radius: 5px;
+}
+
+ul.error_list {
+	list-style-type: none;
+	padding: 0px;
+	color: firebrick;
+	font-weight: 600;
+}
+
+.no-pad {
+	padding: 0px!important;
+}
+
+.no-mar {
+	margin: 0px!important;
+}
+
+.no-mar-pad {
+	margin: 0px!important;
+	padding: 0px!important;
+}
+
+/*Color for submenu active*/
+li.opened > ul.sub-menu > li.menu-item > .menu-link > .menu-label > span.sub-ative {
+	color: white!important;
+}
+
+ol.ol-breadcrum {
+	font-size: 2.0em;
+}
+
+.pass-font {
+	font-family: "text-security-disc"!important;
+}
+
+.has-error .form-control {
+	border-width: 1px!important;
+	border-style: solid!important;
+    border-color: #f2545b!important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.file-error {
+	border-width: 1px!important;
+	border-style: solid!important;
+    border-color: #f2545b!important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+/*.has-error .form-control:focus {
+   border-color: #f2545b;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}*/
+
+.profile-img-form {
+    object-fit: cover;
+    width: 120px;
+    height:120px;
+    border-radius: 50%;
+}
+
+.galery-bg {
+    height:150px; 
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center bottom;   
+}
+
+span.apexcharts-legend-text{
+    color:white!important;
+}
+
+.list-group {
+    margin-bottom: 20px!important; 
+}
+
+span.label_show {
+    font-weight: bold;
+}
+
+span.label_show span{
+    font-weight: normal;
+}
+
+.suffix, .prefix {
+    display: inline;
+    font-weight: normal!important;
+}
+
+img .image-list {
+    object-fit: cover;
+    width: 221px;
+    height: 147px;
+}

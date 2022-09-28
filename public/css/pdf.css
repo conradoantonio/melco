@@ -1,0 +1,105 @@
+html{
+	font-family: 'Roboto', sans-serif;
+	margin-right: 0;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+th, td {
+    text-align: center!important;
+    font-size: 14px;
+}
+h5,
+p{
+	font-size: 15px;
+	padding: 0px;
+	margin: 0px;
+}
+
+h3{
+	padding: 0px;
+	margin-bottom: 0px;
+}
+.no-padding{
+	padding: 0px;
+}
+.no-margin{
+	margin: 0px;
+}
+img.img-logo{
+	width: 20%;
+}
+.centrar{
+	text-align: center;
+}
+.title{
+	color: #006064;
+}
+.subtitle{
+	color: #004d40;
+}
+
+.rf-laboratory{
+    display: inline-block;
+    width: 210px;
+    height: 75px;
+    margin: 10px;
+    border-bottom: 3px solid gray;
+}
+
+.Shield-Box,
+.RF-Test-Agilent,
+.RF-Test-CMW,
+.RF-Test-CMU{
+    display: inline-block;
+    width: 220px;
+    height: 40px;
+    margin: 5px;
+    border-bottom: 3px solid gray;
+}
+
+.Link-DMS{
+	display: inline-block;
+    width: 700px;
+    height: 80px;
+    border-bottom: 3px solid gray;	
+}
+.justify{
+	text-align: justify;
+}
+body {
+	width: 700px;
+	margin-top:20mm;
+}
+.container{
+	width: 600px;
+}
+.separate{
+	height: 30mm;
+}
+
+.separate2{
+	height: 15mm;
+}
+
+.fixed-top-left{
+	position:fixed; 
+}
+
+.fixed-top-right {
+	position: fixed;
+}
+.logo {
+	width: 30mm;
+	height: 15mm;
+}
+.header-info {
+	margin-right: 12mm;
+	text-align: right;
+	font-size: 12px!important;
+}
+#header{
+	height: 70px;
+}
