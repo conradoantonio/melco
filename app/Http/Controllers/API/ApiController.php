@@ -165,30 +165,62 @@ class ApiController extends Controller
         $action = "POST";
         $title = "/shipments"; // Shipments
 
-        $response = $client->post( $request_uri, [
-            'headers' => [
-                'Access-Control-Request-Method' => 'POST, GET, OPTIONS, DELETE',
-                'Access-Control-Allow-Origin' => '*',
-                'Access-Control-Allow-Headers' => 'x-requested-with, Content-Type',
-                'Api-key' => $this->apiKey,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Accept-Encoding' => 'gzip',
-                'Authorization' => 'Token token="QFkZqkFAu9RWrDPVbaWB94fHLZwIifss2Ds2lzFRV58t"'
+        $dataToSend = [
+            "address_from" => [
+                'province' => 'Jalisco', 
+                'city' => 'Zapopan', 
+                'name' => 'Edgard Vargas', 
+                'zip' => '45134', 
+                'country' => 'MX', 
+                'address1' => 'Avenida Angel Leaño #3056', 
+                'company' => 'Bridgestudio', 
+                'address2' => 'Avenida Juan Gil Preciado', 
+                'phone' => '3312948789', 
+                'email' => 'edgard@bridgestudio.mx',
+            ], 
+            "parcels" => [
+                [
+                    'weight' => $req->weight, 
+                    'distance_unit' => 'CM', 
+                    'mass_unit' => 'KG', 
+                    'height' => 30, 
+                    'width' => 30, 
+                    'length' => 30, 
+                ]
             ],
-            'json' => json_encode($request_body),
-            'allow_redirects' => true,
-            'timeout' => 200,
-            'http_errors' => true,
-            'connect_timeout' => 10
-        ]);
+            "address_to" => [
+                'province' => $direccion->estado, 
+                'city' => $direccion->ciudad, 
+                'name' => $user->fullname, 
+                'zip' => $direccion->codigo_postal, 
+                'country' => $direccion->pais, 
+                'address1' => $direccion->calle, 
+                'company' => 'Melcowin', 
+                'address2' => $direccion->colonia, 
+                'phone' => $user->phone ?? '33362772', 
+                'email' => $user->email,
+                'reference' => 'Hola',
+                // 'reference' => $direccion->referencias,
+                'contents' => 'Producto con embalaje',
+            ], 
+            "consignment_note_class_code" => "53131600", 
+            "consignment_note_packaging_code" => "1H1", 
+            "carriers" => [
+                array( "name" => "DHL" ), array( "name" => "Fedex" )
+            ]
+        ];
 
-        $data = $response->getBody();
+        // dd(json_encode($dataEncoded));
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Token token=QFkZqkFAu9RWrDPVbaWB94fHLZwIifss2Ds2lzFRV58t',
+            'Content-Type' => 'application/json',
+        ])->post( $request_uri, $dataToSend);
+
+
+        $data = json_decode($response->getBody());
         $status_code = $response->getStatusCode();
-        
-        dd(json_encode(json_decode($data)));
 
-        $data = json_decode($data);
         $delivery_cost = $data->included[1]->attributes->total_pricing;
 
         // dd($delivery_cost);
