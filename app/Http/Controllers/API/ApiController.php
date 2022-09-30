@@ -107,110 +107,70 @@ class ApiController extends Controller
 
         if (! $direccion ) { return response(['msg' => 'ID de dirección inválido', 'status' => 'error'], 200); }
 
-        // dd($user, $direccion);
-
-        // $art = Articulo::find($req->weight);
-
-        // if (! $art ) { return response(['msg' => 'ID de artículo inválido', 'status' => 'error'], 200); }
-
-        $request_body = new \stdClass();
-        $request_body->address_from = array(
-            'province' => 'Jalisco', 
-            'city' => 'Zapopan', 
-            'name' => 'Edgard Vargas', 
-            'zip' => '45134', 
-            'country' => 'MX', 
-            'address1' => 'Avenida Angel Leaño #3056', 
-            'company' => 'Bridgestudio', 
-            'address2' => 'Avenida Juan Gil Preciado', 
-            'phone' => '3312948789', 
-            'email' => 'edgard@bridgestudio.mx',
-        );
-        $parcels = array(
-            'weight' => $req->weight, 
-            'distance_unit' => 'CM', 
-            'mass_unit' => 'KG', 
-            'height' => 30, 
-            'width' => 30, 
-            'length' => 30, 
-        );
-        $request_body->parcels = array($parcels);
-        $request_body->address_to = array(
-            'province' => $direccion->estado, 
-            'city' => $direccion->ciudad, 
-            'name' => $user->fullname, 
-            'zip' => $direccion->codigo_postal, 
-            'country' => $direccion->pais, 
-            'address1' => $direccion->calle, 
-            'company' => 'Melcowin', 
-            'address2' => $direccion->colonia, 
-            'phone' => $user->phone, 
-            'email' => $user->email,
-            'reference' => $direccion->referencias,
-            'contents' => 'Producto con embalaje',
-        );
-
-        $request_body->consignment_note_class_code = '53131600';
-        $request_body->consignment_note_packaging_code = '1H1';
-
-        // dd(json_encode($request_body));
-
-        // $skydropxObject = new SkydropxController;
-        // $request = new Request;
-        // $request->request_body = $request_body;
-        // $skydropxResponse = $skydropxObject->shipments($request, $request_body);
-
-        $request_uri = "{$this->uri}v1/shipments";
+        $delivery_cost = 0;
+        $request_uri = "{$this->uri}v1/quotations";
         $client = new Client();
         $action = "POST";
-        $title = "/shipments"; // Shipments
+        $title = "/quotations"; // Shipments
 
         $dataToSend = [
-            "address_from" => [
-                'province' => 'Jalisco', 
-                'city' => 'Zapopan', 
-                'name' => 'Edgard Vargas', 
-                'zip' => '45134', 
-                'country' => 'MX', 
-                'address1' => 'Avenida Angel Leaño #3056', 
-                'company' => 'Bridgestudio', 
-                'address2' => 'Avenida Juan Gil Preciado', 
-                'phone' => '3312948789', 
-                'email' => 'edgard@bridgestudio.mx',
+            "zip_from" => "44160", 
+            "zip_to" => $direccion->codigo_postal, 
+            "parcel" => [
+                "weight" => $req->weight,
+                "height" => "30", 
+                "width"  => "30", 
+                "length" => "30" 
             ], 
-            "parcels" => [
-                [
-                    'weight' => $req->weight, 
-                    'distance_unit' => 'CM', 
-                    'mass_unit' => 'KG', 
-                    'height' => 30, 
-                    'width' => 30, 
-                    'length' => 30, 
-                ]
-            ],
-            "address_to" => [
-                'province' => $direccion->estado, 
-                'city' => $direccion->ciudad, 
-                'name' => $user->fullname, 
-                'zip' => $direccion->codigo_postal, 
-                'country' => $direccion->pais, 
-                'address1' => $direccion->calle, 
-                'company' => 'Melcowin', 
-                'address2' => $direccion->colonia, 
-                'phone' => $user->phone ?? '33362772', 
-                'email' => $user->email,
-                'reference' => 'Hola',
-                // 'reference' => $direccion->referencias,
-                'contents' => 'Producto con embalaje',
-            ], 
-            "consignment_note_class_code" => "53131600", 
-            "consignment_note_packaging_code" => "1H1", 
             "carriers" => [
-                array( "name" => "DHL" ), array( "name" => "Fedex" )
+                [ "name" => "Estafeta" ], [ "name" => "Fedex" ]
             ]
         ];
 
-        // dd(json_encode($dataEncoded));
+        // $dataToSend = [
+        //     "address_from" => [
+        //         'province' => 'Jalisco', 
+        //         'city' => 'Zapopan', 
+        //         'name' => 'Edgard Vargas', 
+        //         'zip' => '45134', 
+        //         'country' => 'MX', 
+        //         'address1' => 'Avenida Angel Leaño #3056', 
+        //         'company' => 'Bridgestudio', 
+        //         'address2' => 'Avenida Juan Gil Preciado', 
+        //         'phone' => '3312948789', 
+        //         'email' => 'edgard@bridgestudio.mx',
+        //     ], 
+        //     "parcels" => [
+        //         [
+        //             'weight' => $req->weight, 
+        //             'distance_unit' => 'CM', 
+        //             'mass_unit' => 'KG', 
+        //             'height' => 30, 
+        //             'width' => 30, 
+        //             'length' => 30, 
+        //         ]
+        //     ],
+        //     "address_to" => [
+        //         'province' => $direccion->estado, 
+        //         'city' => $direccion->ciudad, 
+        //         'name' => $user->fullname, 
+        //         'zip' => $direccion->codigo_postal, 
+        //         'country' => $direccion->pais, 
+        //         'address1' => $direccion->calle, 
+        //         'company' => 'Melcowin', 
+        //         'address2' => $direccion->colonia, 
+        //         'phone' => $user->phone ?? '33362772', 
+        //         'email' => $user->email,
+        //         'reference' => 'Hola',
+        //         // 'reference' => $direccion->referencias,
+        //         'contents' => 'Producto con embalaje',
+        //     ], 
+        //     "consignment_note_class_code" => "53131600", 
+        //     "consignment_note_packaging_code" => "1H1", 
+        //     "carriers" => [
+        //         [ "name" => "DHL" ], [ "name" => "Fedex" ]
+        //     ]
+        // ];
 
         $response = Http::withHeaders([
             'Authorization' => 'Token token=QFkZqkFAu9RWrDPVbaWB94fHLZwIifss2Ds2lzFRV58t',
@@ -221,11 +181,12 @@ class ApiController extends Controller
         $data = json_decode($response->getBody());
         $status_code = $response->getStatusCode();
 
-        $delivery_cost = $data->included[1]->attributes->total_pricing;
-
-        // dd($delivery_cost);
-
-        return response(['msg' => 'Costo de envío enlistado a continuación', 'status' => 'success', 'data' => ['costo' => $delivery_cost, 'moneda' => 'MXN']], 200);
+        if ( $data[0] ) {
+            $delivery_cost = $data[0]->total_pricing;
+            return response(['msg' => 'Costo de envío enlistado a continuación', 'status' => 'success', 'data' => ['costo' => $delivery_cost, 'moneda' => 'MXN']], 200);
+        } else {
+            return response(['msg' => 'No se pudo cotizar el envío con los datos proporcionados, verifique su información', 'status' => 'error'], 200);
+        }
     }
 
     /**
