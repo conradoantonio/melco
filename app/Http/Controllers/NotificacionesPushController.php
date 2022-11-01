@@ -70,7 +70,7 @@ class NotificacionesPushController extends Controller
 
         $str_errors = '';
         if ( array_search('error', $response) ) {
-            return response(['msg' => $response['msg'], 'status' => 'warning'], 400);
+            return response(['msg' => $response['msg'], "data" => $response, 'status' => 'warning'], 400);
         } else {
             return response(['msg' => $response['msg'], 'status' => 'success'], 200);
         }

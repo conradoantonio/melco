@@ -20,7 +20,7 @@ class QuestionsController extends Controller
 
     	if (! $user ) { return response(['msg' => 'Usuario no encontrado', 'status' => 'error'], 200); }
 
-        $data = Question::orderBy('id', 'desc')->get();
+        $data = Question::orderBy('id', 'desc')->where("user_id", $req->user_id)->get();
 
         if ( count( $data ) ) {
             return response(['msg' => 'Registros enlistados a continuación', 'status' => 'success', 'data' => $data], 200);

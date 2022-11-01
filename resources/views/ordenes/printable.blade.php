@@ -28,8 +28,10 @@
                             <div class="">Fecha de orden: {{$item->fecha_formateada}}</div>
                         </div>
                          <div class="col-md-12 text-right my-auto">
-                            <h2 class="font-primary">Guía: #{{$skypdropx_label->data->attributes->tracking_number}}</h2>
-                            <a class="btn btn-md btn-primary" target="_blank" href="{{ $skypdropx_label->data->attributes->label_url }}">Descargar Guía</a>
+                            <h2 class="font-primary">Guía: #{{$skypdropx_label ? $skypdropx_label->data->data->attributes->tracking_number : 'Sin guía'}}</h2>
+                            @if( $skypdropx_label )
+                            <a class="btn btn-md btn-primary" target="_blank" href="{{ $skypdropx_label ? $skypdropx_label->data->data->attributes->label_url : '' }}">Descargar Guía</a>
+                            @endif
                         </div>
                     </div>
                     @if ( $item->detalles )

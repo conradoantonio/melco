@@ -167,12 +167,10 @@ trait GeneralFunctions
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-
         $response = curl_exec($ch);
         curl_close($ch);
         
         $res = json_decode($response);
-
         $str_errors = '';
         if ( property_exists($res, 'errors') ) {
             $msg = 'Notificación no enviada, revise que los parámetros estén escritos correctamente';

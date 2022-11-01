@@ -70,11 +70,11 @@ class QuestionsController extends Controller
             return response(['msg' => 'No se encontró el registro a editar', 'status' => 'error', 'url' => url('registros')], 404);
         }
 
-        $item->nombre = $req->nombre;
+        $item->respuesta = $req->respuesta;
 
         $item->save();
 
-        return response(['msg' => 'Registro actualizado correctamente', 'url' => url('registros'), 'status' => 'success'], 200);
+        return response(['msg' => 'Registro actualizado correctamente', 'url' => url('formulario-de-contacto'), 'status' => 'success'], 200);
     }
 
     /**

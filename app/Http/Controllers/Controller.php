@@ -36,8 +36,8 @@ class Controller extends BaseController
         $this->actual_date = date('Y-m-d');
         $this->actual_month = date('Y-m');
         $this->actual_datetime = date('Y-m-d H:i:s');
-        $this->app_id = "2a4dcfd2-c79b-412d-b382-aeb05db32781";
-        $this->app_key = "NjJmYmU3MjMtOTc2Mi00OTUyLWIwNjMtOWQ0NGJiOTA5NDNm";
+        $this->app_id = "5e6822ca-f71d-4fa7-be23-2829e8650f13";
+        $this->app_key = "NmE4MTUwNWUtMjcyNy00OWM1LWE1MzQtOTI1NmRjZmYzYjc4";
         $this->app_icon = asset("img/icon_customer.png");
 
         $this->middleware(function ($request, $next) {

@@ -99,12 +99,13 @@ trait OpenpayMethods
         $user = User::find($req->user_id);
 
         if (! $user ) { return ['msg' => 'ID de usuario no encontrado', 'status' => 'error']; }
-
+        return ['msg' => 'jeje', 'status' => 'error'];
         $this->openpay = Openpay::getInstance();
+        return ['msg' => 'jeje', 'status' => 'error'];
         $customer = $this->openpay->customers->get($user->openpay_id);
-
+        return ['msg' => 'jeje', 'status' => 'error'];
         if (! $customer ) { return ['msg' => 'El cliente no se encuentra registrado para pagos en líneo', 'status' => 'error']; }
-
+        return ['msg' => 'jeje', 'status' => 'error'];
         try {
 
             $cardDataRequest = array(

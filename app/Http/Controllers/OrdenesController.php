@@ -109,10 +109,10 @@ class OrdenesController extends Controller
         $item->fecha_formateada = strftime('%d', strtotime($time)).' de '.strftime('%B', strtotime($time)). ' del '.strftime('%Y', strtotime($time))/*. ' a las '.strftime('%H:%M', strtotime($time)). ' hrs.'*/;
 
         $skypdropx_label = DB::table('skypdrop_labels')->where('order_id', $item->id)->get()->first();
-        $skypdropx_label->data = json_decode($skypdropx_label->data);
-
-        // dd($skypdropx_label);
-        
+        if($skypdropx_label) {
+            $skypdropx_label->data = json_decode($skypdropx_label->data);
+        }
+        //dd($skypdropx_label);
         return view('ordenes.details', compact(['item', 'menu', 'title', 'skypdropx_label']));
     }
 

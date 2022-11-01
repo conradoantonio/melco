@@ -40,12 +40,12 @@ class CardsController extends Controller
         $user = User::find($req->user_id);
 
         if (! $user ) { return response(['msg' => 'ID de usuario inválido', 'status' => 'error'], 200); }
-
+        return response(['msg' => 'ID de usuario inválido', 'status' => 'error'], 200);
     	$res = $this->saveOpenpayCard($req);
         if ( $res['status'] != 'success' ) { return response($res, 500); }#Card wasn't created on openpay
-
+        return response(['msg' => 'ID de usuario inválido', 'status' => 'error'], 200);
         $tarjeta = New Tarjeta;
-
+        return response(['msg' => 'ID de usuario inválido', 'status' => 'error'], 200);
         $tarjeta->user_id = $user->id;
         $tarjeta->token = $res['data']->id;
         $tarjeta->tipo = $res['data']->brand;

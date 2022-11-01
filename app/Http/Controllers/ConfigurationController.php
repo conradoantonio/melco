@@ -17,7 +17,7 @@ class ConfigurationController extends Controller
     {
         $title = "Políticas de privacidad";
         $menu = "Configuración";
-        $item = Configuration::first();
+        $item = Info::find(1);
 
         return view('configurations.terms_conditions', compact('item', 'menu', 'title'));
     }
@@ -44,7 +44,7 @@ class ConfigurationController extends Controller
      * Save a new resource.
      *
      */
-    public function saveTermsConditions(Request $req)
+    public function save_terms_conditions(Request $req)
     {
         $item = $req->id ? Info::find($req->id) : New Info;
         
